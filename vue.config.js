@@ -5,6 +5,6 @@
 */
 
 module.exports = {
-    publicPath: '/myself/docs',
+    publicPath: '/docs',
     outputDir: 'docs'
 };
