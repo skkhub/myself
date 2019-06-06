@@ -1,4 +1,4 @@
-# myself3
+# myself
 
 ## Project setup
 ```
