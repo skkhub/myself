@@ -1,0 +1,126 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    word-break: break-all;
+    // ios跟随苹果系统的字体栈
+    font-family: "-apple-system", sans-serif;
+
+    -webkit-tap-highlight-color: transparent; // hack IOS点击闪烁问题
+    &:focus {
+        outline: none;
+    }
+}
+
+html,
+body {
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    padding-top: .1px;
+}
+
+ul,
+li {
+    list-style: none;
+}
+i,
+b,
+address {
+    font-weight: normal;
+    font-style: normal;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+a {
+    color: inherit;
+
+    -webkit-touch-callout: none;
+    // -webkit-user-select: none;
+}
+input,
+textarea,
+button {
+    -webkit-appearance: none;
+}
+
+// 1px线宽的less实现，首先是单条线，目前只有border-top border-bottom两种
+._border-1px-core() {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    pointer-events: none; /* 防止点击触发 */
+}
+._border-1px-border(bottom; @color) {
+    border-bottom: 1px solid @color;
+}
+._border-1px-border(top; @color) {
+    border-top: 1px solid @color;
+}
+._border-1px-ele(@dir; @color; before) {
+    &:before {
+        ._border-1px-border(@dir; @color);
+        ._border-1px-core();
+    }
+}
+._border-1px-ele(@dir; @color; after) {
+    &:after {
+        ._border-1px-border(@dir; @color);
+        ._border-1px-core();
+    }
+}
+.border-1px(@dir: bottom;
+@color: #ebebeb;
+@ele: before) {
+    position: relative;
+
+    ._border-1px-ele(@dir; @color; @ele);
+}
+// 这是4边都有
+._borders-1px-core(@radius; @color) {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    border: 1px solid @color;
+    border-radius: @radius;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    pointer-events: none; /* 防止点击触发 */
+}
+._borders-1px-ele(@radius; @color; before) {
+    &:before {
+        ._borders-1px-core(@radius; @color);
+    }
+}
+._borders-1px-ele(@radius; @color; after) {
+    &:after {
+        ._borders-1px-core(@radius; @color);
+    }
+}
+.borders-1px(@radius: 0;
+@color: #ebebeb;
+@ele: before) {
+    position: relative;
+
+    ._borders-1px-ele(@radius; @color; @ele);
+}
